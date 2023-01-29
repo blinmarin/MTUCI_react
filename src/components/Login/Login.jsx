@@ -14,24 +14,37 @@ function Login() {
     async function login2() {
         console.warn(email,password)
         let item={email,password};
-        let result = fetch("https://mtuci-backend.swedencentral.cloudapp.azure.com/auth/login", {
-            mode: 'no-cors',
-            method: 'POST',
-            /*Header: 'accept: application/json',
-            Header: 'Content-Type: application/json',*/
-          
-            headers:{
-                'accept' : 'application/json',
-                'Content-Type' : 'application/json'},
-                
-            body: {
-                "username": "mbortnikova@yandex.ru",
-                "password":  "WBNJVEDR"}
-        });
         
-        alert(result)
-        localStorage.setItem("user-info", JSON.stringify(result))
-        alert("add")
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                "username": "mbortnikova@yandex.ru",
+                "password":  "WBNJVEDR"
+                 })
+        };
+        fetch('https://mtuci-backend.swedencentral.cloudapp.azure.com/auth/login', requestOptions)
+            .then(async response => {
+                const isJson = response.headers.get('content-type')?.includes('application/json');
+                const data = isJson && await response.json();
+    
+                // check for error response
+                if (!response.ok) {
+                    // get error message from body or default to response status
+                    const error = (data && data.message) || response.status;
+                    return Promise.reject(error);
+                } else {
+                    console.log('Got!', data);
+                    localStorage.setItem("user-info", JSON.stringify(data))
+                    navigate('/profile');
+                }
+    
+            })
+            .catch(error => {
+                this.setState({ errorMessage: error.toString() });
+                console.error('There was an error!', error);
+            });
+          
     }
 
     return (
