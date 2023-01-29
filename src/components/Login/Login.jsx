@@ -1,7 +1,39 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import React from 'react';
+import { useEffect } from 'react';
+import { useState } from 'react';
 import style from './Login.module.css';
 
 function Login() {
+
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const navigate = useNavigate();
+
+    async function login2() {
+        console.warn(email,password)
+        let item={email,password};
+        let result = fetch("https://mtuci-backend.swedencentral.cloudapp.azure.com/auth/login", {
+            mode: 'no-cors',
+            method: 'POST',
+            /*Header: 'accept: application/json',
+            Header: 'Content-Type: application/json',*/
+          
+            headers:{
+                'accept' : 'application/json',
+                'Content-Type' : 'application/json'},
+                
+            body: {
+                "username": "mbortnikova@yandex.ru",
+                "password":  "WBNJVEDR"}
+        });
+        
+        alert(result)
+        localStorage.setItem("user-info", JSON.stringify(result))
+        alert("add")
+    }
+
     return (
         <div className="Log">
             <main>
@@ -19,8 +51,7 @@ function Login() {
                         </div>
                     </div>
                     <div className={style.button}>
-                        <input type="radio" id="button"></input>
-                        <label htmlFor="button">Войти</label>
+                        <button onClick={login2}>Войти</button>
                     </div>
                     <div className={style.link}>
                         <NavLink to = "/new_password">
