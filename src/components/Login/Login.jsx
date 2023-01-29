@@ -23,6 +23,8 @@ function Login() {
                 "password":  "WBNJVEDR"
                  })
         };
+
+        
         fetch('https://mtuci-backend.swedencentral.cloudapp.azure.com/auth/login', requestOptions)
             .then(async response => {
                 const isJson = response.headers.get('content-type')?.includes('application/json');
@@ -41,8 +43,7 @@ function Login() {
     
             })
             .catch(error => {
-                this.setState({ errorMessage: error.toString() });
-                console.error('There was an error!', error);
+                console.error('There was an error!', error.toString());
             });
           
     }
