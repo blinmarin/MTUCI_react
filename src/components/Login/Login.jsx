@@ -41,8 +41,7 @@ function Login() {
     
             })
             .catch(error => {
-                this.setState({ errorMessage: error.toString() });
-                console.error('There was an error!', error);
+                console.error('There was an error!', error.toString());
             });
           
     }
