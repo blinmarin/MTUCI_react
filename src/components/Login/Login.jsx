@@ -11,16 +11,15 @@ function Login() {
 
     const navigate = useNavigate();
 
-    async function login2() {
+    async function login() {
         console.warn(email,password)
-        let item={email,password};
         
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                "username": "mbortnikova@yandex.ru",
-                "password":  "WBNJVEDR"
+                "username": email,
+                "password": password
                  })
         };
 
@@ -57,15 +56,17 @@ function Login() {
                     </div>
                     <div className={style.fields}>
                         <div className={style.field}>
-                            <input type="text" placeholder="Логин"></input>
+                            <input type="text" placeholder="Email"
+                            onChange = {(e) => setEmail(e.target.value)}></input>
 
                         </div>
                         <div className={style.field}>
-                            <input type="text" placeholder="Пароль"></input>
+                            <input type="password" placeholder="Пароль"
+                            onChange = {(e) => setPassword(e.target.value)}></input>
                         </div>
                     </div>
                     <div className={style.button}>
-                        <button onClick={login2}>Войти</button>
+                        <button onClick={login}>Войти</button>
                     </div>
                     <div className={style.link}>
                         <NavLink to = "/new_password">
