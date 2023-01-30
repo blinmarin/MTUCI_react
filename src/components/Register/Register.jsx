@@ -41,7 +41,7 @@ function Register() {
                 } else {
                     console.log('Got!', data);
                     localStorage.setItem("user-info", JSON.stringify(data))
-                    navigate('/login');
+                    //navigate('/login');
                 }
     
             })
