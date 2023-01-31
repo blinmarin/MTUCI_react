@@ -8,7 +8,6 @@ export const fetchToken = () => {
     return localStorage.getItem('Tokenchik')
 }
 
-
 export function RequireToken({ children }) {
 
     let auth = fetchToken()

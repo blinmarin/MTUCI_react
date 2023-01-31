@@ -10,8 +10,6 @@ import { RequireToken } from './components/Auth';
 const App = () => {
   return (
 
-
-
     <div className='App'>
 
       <Routes>
@@ -26,9 +24,7 @@ const App = () => {
             </RequireToken>} />
       </Routes>
 
-
     </div>
-
   );
 }
 
