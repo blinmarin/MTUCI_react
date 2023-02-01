@@ -3,6 +3,7 @@ import style from './Register.module.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import ErrorMessage from '../ErrorMessage';
+import 'boxicons/css/boxicons.min.css'
 
 
 function Register() {
@@ -18,14 +19,15 @@ function Register() {
     const [id_cardError, setId_cardError] = useState("Обязательное поле")
     const [errorMessage, setErrorMessage] = useState("");
     const [formValid, setFormValid] = useState(false)
+    const [loadind, setLoading] = useState(false)
 
     useEffect(() => {
-        if (emailError || errorMessage || fullnameError || id_cardError) {
+        if (emailError || errorMessage || fullnameError || id_cardError || loadind) {
             setFormValid(false)
         } else {
             setFormValid(true)
         }
-    }, [emailError, errorMessage, fullnameError, id_cardError])
+    }, [emailError, errorMessage, fullnameError, id_cardError, loadind])
 
     const emailHandler = (e) => {
         setEmail(e.target.value)
@@ -82,6 +84,8 @@ function Register() {
 
     async function register() {
 
+        setLoading(true)
+
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -112,12 +116,15 @@ function Register() {
                         setErrorMessage(data)
                     }
                     localStorage.setItem("user-info", JSON.stringify(data))
+                    setLoading(false)
                 }
             })
             .catch(error => {
                 console.error('There was an error!', error.toString());
             });
     }
+
+
 
 
 
@@ -169,8 +176,15 @@ function Register() {
 
                     <ErrorMessage message={errorMessage} />
 
-                    <div >
-                        <button className={style.button} disabled={!formValid} onClick={register}>OK</button>
+                    <div>
+                        <button
+                            className={style.button}
+                            disabled={!formValid}
+                            onClick={register}
+                            placeholder="ОК">
+                            {(loadind) && <i className="bx bx-loader-alt bx-spin"></i>}
+                            {(!loadind) && <text>ОК</text>}
+                        </button>
                     </div>
 
                     <div>

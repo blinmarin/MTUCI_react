@@ -8,6 +8,7 @@ import ErrorMessage from '../ErrorMessage';
 import { Icon } from 'react-icons-kit'
 import { eyeOff } from 'react-icons-kit/feather/eyeOff'
 import { eye } from 'react-icons-kit/feather/eye'
+import 'boxicons/css/boxicons.min.css'
 
 function Login() {
 
@@ -19,16 +20,17 @@ function Login() {
     const [errorMessage, setErrorMessage] = useState("");
     const [passwordError, setPasswordError] = useState("Обязательное поле")
     const [formValid, setFormValid] = useState(false)
+    const [loadind, setLoading] = useState(false)
 
     useEffect(() => {
-        if (emailError || errorMessage || passwordError) {
+        if (emailError || errorMessage || passwordError || loadind) {
             setFormValid(false)
 
         } else {
             setFormValid(true)
         }
 
-    }, [emailError, errorMessage, passwordError])
+    }, [emailError, errorMessage, passwordError, loadind])
 
 
     const emailHandler = (e) => {
@@ -74,6 +76,8 @@ function Login() {
 
     async function login() {
 
+        setLoading(true)
+
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -104,6 +108,7 @@ function Login() {
                     console.log('Got!', data);
                     setErrorMessage(data.message)
                     localStorage.setItem("user-info", JSON.stringify(data))
+                    setLoading(false)
                 }
             })
             .catch(error => {
@@ -165,7 +170,14 @@ function Login() {
                     {(passwordDirty && errorMessage) && <ErrorMessage message={errorMessage} />}
 
                     <div>
-                        <button className={style.button} disabled={!formValid} onClick={login}>Войти</button>
+                        <button
+                            className={style.button}
+                            disabled={!formValid}
+                            onClick={login}
+                            placeholder="Войти">
+                            {(loadind) && <i className="bx bx-loader-alt bx-spin"></i>}
+                            {(!loadind) && <text>Войти</text>}
+                        </button>
                     </div>
                     <div className={style.link}>
                         <NavLink to="/new_password">

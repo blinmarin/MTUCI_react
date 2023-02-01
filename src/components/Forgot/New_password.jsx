@@ -2,6 +2,7 @@ import style from './New_password.module.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import ErrorMessage from '../ErrorMessage';
+import 'boxicons/css/boxicons.min.css'
 
 
 
@@ -13,16 +14,17 @@ function New_password() {
     const [emailError, setEmailError] = useState("Обязательное поле")
     const [errorMessage, setErrorMessage] = useState("");
     const [formValid, setFormValid] = useState(false)
+    const [loadind, setLoading] = useState(false)
 
     useEffect(() => {
-        if (emailError || errorMessage) {
+        if (emailError || errorMessage || loadind) {
             setFormValid(false)
 
         } else {
             setFormValid(true)
         }
 
-    }, [emailError, errorMessage])
+    }, [emailError, errorMessage, loadind])
 
 
     const emailHandler = (e) => {
@@ -51,7 +53,8 @@ function New_password() {
 
 
     async function new_password() {
-        console.warn(email)
+
+        setLoading(true)
 
         const requestOptions = {
             method: 'POST',
@@ -60,7 +63,6 @@ function New_password() {
                 "email": email
             })
         };
-
 
         fetch('https://mtuci-backend.swedencentral.cloudapp.azure.com/auth/recover', requestOptions)
             .then(async response => {
@@ -76,13 +78,13 @@ function New_password() {
                     console.log('Got!', data);
                     setErrorMessage(data)
                     localStorage.setItem("user-info", JSON.stringify(data))
+                    setLoading(false)
                 }
 
             })
             .catch(error => {
                 console.error('There was an error!', error.toString());
             });
-
     }
 
     return (
@@ -107,9 +109,17 @@ function New_password() {
                             <ErrorMessage message={errorMessage} />
                         </div>
                     </div>
-                    <div >
-                        <button className={style.button} disabled={!formValid} onClick={new_password}>Отправить</button>
+                    <div>
+                        <button
+                            className={style.button}
+                            disabled={!formValid}
+                            onClick={new_password}
+                            placeholder="Отправить">
+                            {(loadind) && <i className="bx bx-loader-alt bx-spin"></i>}
+                            {(!loadind) && <text>Отправить</text>}
+                        </button>
                     </div>
+
                 </div>
             </main>
         </div>);
