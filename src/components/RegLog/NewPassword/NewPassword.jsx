@@ -1,4 +1,4 @@
-import style from './New_password.module.css';
+import style from './NewPassword.module.css';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import ErrorMessage from '../ErrorMessage';
@@ -7,11 +7,11 @@ import 'boxicons/css/boxicons.min.css'
 
 
 
-function New_password() {
+function NewPassword() {
 
     const [email, setEmail] = useState("");
     const [emailDirty, setEmailDirty] = useState(false)
-    const [emailError, setEmailError] = useState("Обязательное поле")
+    const [emailError, setEmailError] = useState("Введите email")
     const [errorMessage, setErrorMessage] = useState("");
     const [formValid, setFormValid] = useState(false)
     const [loadind, setLoading] = useState(false)
@@ -116,7 +116,7 @@ function New_password() {
                             onClick={new_password}
                             placeholder="Отправить">
                             {(loadind) && <i className="bx bx-loader-alt bx-spin"></i>}
-                            {(!loadind) && <text>Отправить</text>}
+                            {(!loadind) && <div>Отправить</div>}
                         </button>
                     </div>
 
@@ -125,4 +125,4 @@ function New_password() {
         </div>);
 }
 
-export default New_password
+export default NewPassword

@@ -1,13 +1,13 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
-import New_password from './components/Forgot/New_password';
-import Login from './components/Login/Login';
-import Profile from './components/Profile';
-import Register from './components/Register/Register';
-import { RequireToken } from './components/Auth';
+import NewPassword from './components/RegLog/NewPassword/NewPassword';
+import Login from './components/RegLog/Login/Login';
+import Profile from './components/Profile/Profile';
+import Register from './components/RegLog/Register/Register';
+import { RequireToken } from './components/RegLog/Auth';
 
 
-const App = () => {
+const App = (props) => {
   return (
 
     <div className='App'>
@@ -15,12 +15,12 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="login" element={<Login />} />
-        <Route path="new_password" element={<New_password />} />
+        <Route path="new_password" element={<NewPassword />} />
         <Route path="register" element={<Register />} />
-        <Route path="profile"
+        <Route path="profile/*"
           element={
             <RequireToken>
-              <Profile />
+              <Profile store = {props.store} />
             </RequireToken>} />
       </Routes>
 

@@ -1,0 +1,15 @@
+.content {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 5%;
+    padding-right: 5%; 
+    padding-left: 5%;
+    padding-bottom: 5%;
+}
+
+.text {
+    font-size: 35px;
+    padding-left: 5%;
+    padding-bottom: 2.5%;
+}
+

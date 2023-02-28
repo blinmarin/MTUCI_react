@@ -80,7 +80,7 @@ function Register() {
 
 
 
-    const navigate = useNavigate();
+   // const navigate = useNavigate();
 
     async function register() {
 
@@ -183,7 +183,7 @@ function Register() {
                             onClick={register}
                             placeholder="ОК">
                             {(loadind) && <i className="bx bx-loader-alt bx-spin"></i>}
-                            {(!loadind) && <text>ОК</text>}
+                            {(!loadind) && <div>ОК</div>}
                         </button>
                     </div>
 

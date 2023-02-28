@@ -1,0 +1,41 @@
+.contentItem{
+    background-color: #fff;
+    margin-bottom: 10%;
+    border-radius: 25px;
+    padding: 8%;
+    height: 105%;
+    /* height: 280px; */
+
+}
+
+.firstItem{
+    margin-bottom: 20px;
+    font-size: 17px;
+}
+
+.item{
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.figureBlue {
+	width: 100%;
+	height: 10px;
+    border-radius: 25px;
+    margin-bottom: 10px;
+	background: #2a3da4;
+}
+
+.figureGreen {
+	width: 100%;
+	height: 10px;
+    border-radius: 25px;
+    margin-bottom: 10px;
+	background: #02d20a;
+}
+
+.button{
+    width: 100%;
+	height: 30px;
+    border-radius: 13px;
+}

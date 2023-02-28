@@ -10,7 +10,9 @@ import { eyeOff } from 'react-icons-kit/feather/eyeOff'
 import { eye } from 'react-icons-kit/feather/eye'
 import 'boxicons/css/boxicons.min.css'
 
+
 function Login() {
+
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -67,6 +69,7 @@ function Login() {
                 break
         }
     }
+
 
 
 
@@ -175,9 +178,12 @@ function Login() {
                             disabled={!formValid}
                             onClick={login}
                             placeholder="Войти">
+                            
                             {(loadind) && <i className="bx bx-loader-alt bx-spin"></i>}
-                            {(!loadind) && <text>Войти</text>}
+                            {(!loadind) && <div>Войти</div>}
                         </button>
+
+                        
                     </div>
                     <div className={style.link}>
                         <NavLink to="/new_password">

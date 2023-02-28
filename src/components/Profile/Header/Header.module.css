@@ -1,0 +1,7 @@
+.header {
+    grid-area: h;
+    background-color: #fff;
+    font-size: 35px;
+    text-align: center;
+    padding: 1.5%;
+}
